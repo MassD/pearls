@@ -1,3 +1,11 @@
+(**
+
+http://stackoverflow.com/questions/20983260/linear-algorithm-for-finding-the-celebrity-group-not-single-celebrity?noredirect=1#comment31567146_20983260
+
+Note: There must be a celebrity group
+
+*)
+
 let l = [0;1;2;3];;
 
 let relations n =
