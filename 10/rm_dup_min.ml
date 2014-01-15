@@ -1,6 +1,7 @@
 let l = ['c';'a';'l';'c';'u';'l';'u';'s']
 let min x y = if x < y then x else y
 let min_in l = List.fold_left min (List.hd l) (List.tl l)
+let min_in_no_nil l = List.fold_left (fun m x -> if x = [] || (x > m && m <> []) then m else x) (List.hd l) (List.tl l)
 let rec rm x = List.filter ((<>) x)
 let rec rm_all xl = List.filter (fun x -> not (List.mem x xl)) 
 
@@ -22,27 +23,35 @@ let rec rdm_1 = function
     if x < y then 
       let a = x::y::(rm_all [x;y] tl |> rdm_1) in
       let b = x::(rm x tl |> rdm_1) in
-      if rest = [] then	min_in [a;b]
-      else min_in [a;b;rest]
+      min_in_no_nil [a;b;rest]
     else 
       let a = y::(rm y tl |> rdm_1) in
-      if rest = [] then a 
-      else min_in [a;rest]
+      min_in_no_nil [a;rest]
 
-let inits l = List.fold_left (fun (init, acc) x -> x::init, (List.rev (x::init))::acc) ([],[]) l |> snd |> List.rev
+let inits acc l = List.fold_left (fun (init, acc) x -> x::init, (List.rev (x::init))::acc) ([],acc) l |> snd |> List.rev
 
-let min_in' l = List.fold_left (fun m x -> if x = [] || (x > m && m <> []) then m else x) (List.hd l) (List.tl l)
-
-let rec hub ws xs =
+let inits_nil = inits [[]]
+let inits_no_nil = inits []
+(* 
+   ws is a list in strictly increasing order.
+   hub is related to rdm, if ws has no strictly increasing order, then hub [x;y] won't work
+*)
+let rec hub_0 ws xs =
   match ws, xs with
     | _, [] -> []
     | [], _ -> rdm_2 xs
-    | _ -> List.fold_left (fun acc x -> (x@(rm_all x xs |> rdm_2))::acc) [] (inits ws) |> min_in'
+    | _ -> List.fold_left (fun acc hd -> (hd@(rm_all hd xs |> rdm_2))::acc) [] (inits_nil ws) |> min_in_no_nil
 and 
     rdm_2 = function
       | [] -> []
       | x::[] -> x::[]
-      | x::y::xs -> if x < y then hub [x;y] xs else hub [y] xs
+      | x::y::xs -> if x < y then hub_0 [x;y] xs else hub_0 [y] xs
+
+let span f l = 
+  let u, v = List.fold_left (fun (u,v) x -> if f x then (x::u, v) else (u, x::v)) ([],[]) l in
+  (List.rev u, List.rev v)
+
+
 
 
 	
