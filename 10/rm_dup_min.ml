@@ -47,9 +47,34 @@ and
       | x::[] -> x::[]
       | x::y::xs -> if x < y then hub_0 [x;y] xs else hub_0 [y] xs
 
+(**
+
+   Below is the best.
+
+*)
+
 let span f l = 
   let u, v = List.fold_left (fun (u,v) x -> if f x then (x::u, v) else (u, x::v)) ([],[]) l in
   (List.rev u, List.rev v)
+
+let mem = List.mem
+let tl = List.tl
+let rec rm_all xl = List.filter (fun x -> not (List.mem x xl)) 
+
+let rec hub old_dup = function
+  | [] -> []
+  | x::xs ->
+    let u, v = span ((>) x) old_dup in
+    match mem x old_dup, mem x xs with
+      | false, false -> u @ [x] @ (hub [] (rm_all u xs))
+      | true, false -> u @ [x] @ (hub (tl v) (rm_all u xs))
+      | false, true -> hub (u@[x]) xs
+      | true, true -> hub old_dup xs
+
+let rm_dup_min = hub []
+  
+
+
 
 
 
