@@ -24,7 +24,7 @@ let ranks l n =
 let install_2nd_rank a k =
   let n = Array.length a in
   let rec install i acc =
-    if i >= n then List.rev acc
+    if i >= n then acc
     else if i+k/2 >= n then install (i+1) ((i,(a.(i),0))::acc)
     else install (i+1) ((i,(a.(i),a.(i+k/2)))::acc)
   in 
