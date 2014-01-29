@@ -74,16 +74,18 @@ let ran_list n =
   Random.self_init();
   let rec gen acc i =
     if i = 0 then acc
-    else gen ((Random.int 10)::acc) (i-1)
+    else gen ((Random.int 1)::acc) (i-1)
   in 
   gen [] n
 
 let _ =
-  let n = 10 in
+  let n = 10000 in
   let l = ran_list n in
   let t1 = Sys.time () in
-  let al1 = all_lcp l in
+  let a = prepare l n in
+  let t1' = Sys.time () in
+  let al1 = all_lcp' a l in
   let t2 = Sys.time () in
   let al2 = all_lcp_bru l in
   let t3 = Sys.time () in
-  Printf.printf "all_lcp costs %f s\nall_lcp_bru costs %f s\ncorrect: %s\n" (t2-.t1) (t3-.t2) (if al1 = al2 then "true" else "false")
+  Printf.printf "prepare array costs %f s\nall_lcp' costs %f s\nall_lcp_bru costs %f s\ncorrect: %s\n" (t2-.t1) (t2-.t1') (t3-.t2) (if al1 = al2 then "true" else "false")
