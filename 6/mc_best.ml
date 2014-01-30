@@ -89,7 +89,7 @@ let glue' x = function
 
 let extend' c x = function
   | [] -> [[[[x]]], (10, x, 1, 0)]
-  | l -> rev_concat_map (fun y -> y |> glue' x |> List.filter (ok_filter c)) l
+  | l -> rev_concat_map (fun y -> glue' x y |> List.filter (ok_filter c)) l
 
 let exps' c l = List.fold_right (fun x acc -> extend' c x acc) l []
 
