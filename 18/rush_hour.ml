@@ -75,4 +75,22 @@ let move g (v,c) =
 
 let solved g = (List.hd g |> snd) = 20
 
+let succ ms q = moves q |> List.map (fun m -> ms @ [m], move q m)
+
+let rec bfs qs ps pss = 
+  match ps, pss with
+  | [], [] -> None
+  | [], _ -> bfs qs (List.rev pss) []
+  | (ms,q)::ps, _ -> 
+    if solved q then Some ms
+    else if List.mem q qs then bfs qs ps pss
+    else bfs (q::qs) ps (List.rev_append (succ ms q) pss)
+
+let rec dfs qs ps =
+  match ps with
+  | [] -> None
+  | (ms,q)::ps -> 
+    if solved q then Some ms
+    else if List.mem q qs then dfs qs ps
+    else dfs (q::qs) ((succ ms q) @ ps)
 
