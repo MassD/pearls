@@ -1,0 +1,5 @@
+"Rule: ocaml: ml -> cmo & cmi (%=all_lcp )": "ØÇÀ_\156«\153\132q2#Î\021ÎÁ\015"
+"Rule: ocaml: ml & cmi -> cmx & o (%=all_lcp )": "\152\159-ä#KİÈï\128^\024\016Æ4V"
+"Rule: ocaml dependencies ml (%=all_lcp )": "\1498Ä\130\019\139aóP\007ã*\156\000\017ç"
+"Rule: ocaml: cmx* & o* -> native (%=all_lcp )": "\128\011\029½M\150ÃéüÚTÊ#e\018\019"
+"Resource: /Users/iamindcs/Dropbox/ocaml/pearls/15/all_lcp.ml": "­\127­ılÊã<(u÷hLâ\nA"

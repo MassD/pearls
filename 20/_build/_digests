@@ -1,0 +1,5 @@
+"Rule: ocaml: ml -> cmo & cmi (%=countdown )": "ı\020Ğ\030a\020û·5¦JXSSé¦"
+"Rule: ocaml: cmx* & o* -> native (%=countdown )": "\031­{\025b\149ö\018q\000\000I\003®8N"
+"Rule: ocaml dependencies ml (%=countdown )": "ZÕ{ )Û\007\017¢Ù\0278}Yñ\128"
+"Rule: ocaml: ml & cmi -> cmx & o (%=countdown )": "\128\156÷@\018\155\012Å\147¹íÑu8(Ê"
+"Resource: /Users/iamindcs/Dropbox/ocaml/pearls/20/countdown.ml": "·8YàùØUÇ\128F\138ëKğ1\129"
