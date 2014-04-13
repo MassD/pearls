@@ -94,3 +94,14 @@ let rec box_allr' = function
 *)
 
 
+
+(* x box y -> (x box y, rev (x box y)) *)
+let box_tuple xs ys = 
+  let rec op1 xs (ys, sy) =
+  match xs with
+    | [] -> ys, sy
+    | x::tl -> 
+      let zs, sz = op1 tl (sy, ys) in
+      ys @ [x] @ zs, sz @ [x] @ sy
+  in 
+  op1 xs (ys, List.rev ys)
