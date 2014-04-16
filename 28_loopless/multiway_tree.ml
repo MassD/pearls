@@ -25,7 +25,11 @@ let preorder_step_bad = function
    1. We can change the parameter to be list of list of multiway_trees
    2. So each time we get the Node, we can directly :: its child multiway_tree list to the list of list
 *)
-let rec preorder_step = function
+let preorder_step = function
   | [] -> None
-  | []::ms -> preorder_step ms
-  | (Node (hd, cms)::ms)::mss -> Some (hd, cms::ms::mss) (* this is constant time, mss is list of list of multiway_trees *)
+  | []::_ -> failwith "wrong"
+  | (Node (hd, cms)::ms)::mss -> (* this is constant time, mss is list of list of multiway_trees *)
+    match cms, ms with
+      | [], [] -> Some (hd, mss) 
+      | mts, [] | [], mts -> Some (hd, mts::mss) 
+      | cms, ms -> Some (hd, cms::ms::mss)

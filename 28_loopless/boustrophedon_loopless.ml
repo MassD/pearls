@@ -30,10 +30,6 @@ let rec box_tuple_all l = List.fold_right box_tuple' l ([],[]) |> fst
 
 
 
-
-
-
-
 type 'a queue = 'a list * 'a list
 
 let rearrange = function
