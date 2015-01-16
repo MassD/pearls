@@ -23,4 +23,4 @@ let rec sort_pairwise_sum l1 l2 =
     | x::[], y::[] -> [x+y]
     | x::xs, y::ys ->
       let la, lb = half l1 and lc, ld = half l2 in
-      sort_pairwise_sum la lc @ List.merge (sort_pairwise_sum la ld) (sort_pairwise_sum lb lc) @ sort_pairwise_sum lb ld
+      sort_pairwise_sum la lc @ List.merge compare (sort_pairwise_sum la ld) (sort_pairwise_sum lb lc) @ sort_pairwise_sum lb ld
